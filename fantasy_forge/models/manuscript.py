@@ -79,13 +79,38 @@ class Manuscript:
 
     def to_dict(self) -> dict:
         """Convert manuscript to dictionary."""
+        # Convert outline
+        outline_dict = None
+        if self.outline:
+            outline_dict = {
+                "title": self.outline.title,
+                "premise": self.outline.premise,
+                "plot_points": [vars(pp) for pp in self.outline.plot_points],
+                "character_arcs": self.outline.character_arcs,
+                "themes": self.outline.themes,
+                "notes": self.outline.notes,
+            }
+        
+        # Convert chapters
+        chapters_dict = []
+        for chapter in self.chapters:
+            chapter_dict = {
+                "number": chapter.number,
+                "title": chapter.title,
+                "synopsis": chapter.synopsis,
+                "scenes": [vars(scene) for scene in chapter.scenes],
+                "word_count": chapter.word_count,
+                "status": chapter.status,
+            }
+            chapters_dict.append(chapter_dict)
+        
         return {
             "title": self.title,
             "author": self.author,
             "synopsis": self.synopsis,
             "genre": self.genre,
-            "outline": vars(self.outline) if self.outline else None,
-            "chapters": [vars(c) for c in self.chapters],
+            "outline": outline_dict,
+            "chapters": chapters_dict,
             "word_count": self.word_count,
             "target_word_count": self.target_word_count,
             "created_at": self.created_at,

@@ -155,7 +155,7 @@ class TextAnalyzer:
         """
         # Simple detection: "was/were/been" + past participle pattern
         passive_patterns = [
-            r'\b(was|were|been)\s+\w+ed\b',
+            r'\b(was|were|been)\s+\w+(ed|en|own|un)\b',
             r'\b(is|are|am|be)\s+being\s+\w+ed\b',
         ]
         
