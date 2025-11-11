@@ -38,6 +38,7 @@ Thumbs.db
 
 # Application data
 data/
+demo_data/
 *.db
 *.sqlite
 
